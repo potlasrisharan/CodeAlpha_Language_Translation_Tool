@@ -1,0 +1,16 @@
+# Python caches
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+env/
+venv/
+
+# History and audio cache
+*.mp3
+translation_history.json
+.DS_Store
+.idea/
+.vscode/

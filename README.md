@@ -10,6 +10,13 @@ A responsive, multilingual translation platform supporting over 100+ global lang
 - **Session History & Export:** Real-time log of translation requests with one-click JSON export.
 - **Anti-Slop Design System:** Strict UI compliance documented in `DESIGN.md` featuring Geist typography and Zinc-950 color discipline.
 
+## CodeAlpha Task 1 Compliance
+- **Interactive UI:** Dual-pane workbench to input text and select source & target languages.
+- **Translation API:** Google Chrome Neural Translation API with MyMemory fallback.
+- **Send & Receive:** Low-latency API pipeline with paragraph chunking and auto-detection.
+- **Clear Display:** Elevated readout card with latency, word count, and character telemetry.
+- **Usability Enhancements:** Instant **Copy to Clipboard** and neural **Text-to-Speech (TTS)** for source and translated text.
+
 ---
 
 ## Architecture Flow

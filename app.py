@@ -314,10 +314,12 @@ with work_col2:
             unsafe_allow_html=True,
         )
 
-    out_c1, out_c2 = st.columns(2)
+    out_c1, out_c2, out_c3 = st.columns(3)
     with out_c1:
         tgt_tts_btn = st.button("Listen Translated Audio", use_container_width=True)
     with out_c2:
+        copy_btn = st.button("Copy to Clipboard", use_container_width=True)
+    with out_c3:
         if result and result.translated_text:
             st.download_button(
                 label="Download Translation",
@@ -326,6 +328,18 @@ with work_col2:
                 mime="text/plain",
                 use_container_width=True,
             )
+
+    if copy_btn and result and result.translated_text:
+        escaped_text = result.translated_text.replace("\\", "\\\\").replace("`", "\\`").replace("$", "\\$").replace('"', '\\"')
+        st.components.v1.html(
+            f"""
+            <script>
+            navigator.clipboard.writeText("{escaped_text}");
+            </script>
+            """,
+            height=0,
+        )
+        st.toast("Copied translated text to clipboard!")
 
 # Audio synthesis handlers
 if src_tts_btn and input_text.strip():

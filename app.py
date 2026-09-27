@@ -96,7 +96,7 @@ st.markdown(
         font-style: italic;
     }
 
-    /* Primary Translate Action Button */
+    /* Primary Action Buttons */
     .stButton > button {
         background-color: #2563eb !important;
         color: #ffffff !important;
@@ -112,6 +112,20 @@ st.markdown(
     }
     .stButton > button:active {
         transform: scale(0.98) !important;
+    }
+
+    /* Secondary outline buttons */
+    .sample-pill button {
+        background-color: #18181b !important;
+        color: #a1a1aa !important;
+        border: 1px solid #27272a !important;
+        font-size: 0.75rem !important;
+        padding: 0.25rem 0.6rem !important;
+        border-radius: 9999px !important;
+    }
+    .sample-pill button:hover {
+        background-color: #27272a !important;
+        color: #f4f4f5 !important;
     }
 
     /* Textarea */
@@ -139,6 +153,8 @@ if "src_lang" not in st.session_state:
     st.session_state.src_lang = "Auto Detect"
 if "tgt_lang" not in st.session_state:
     st.session_state.tgt_lang = "Spanish"
+if "input_text" not in st.session_state:
+    st.session_state.input_text = "Hello world, welcome to our AI translation workspace."
 if "last_result" not in st.session_state:
     st.session_state.last_result = None
 
@@ -199,6 +215,27 @@ with lang_col2:
     )
     st.session_state.tgt_lang = selected_tgt
 
+# Quick sample chips
+sample_cols = st.columns([1, 1, 1, 3])
+with sample_cols[0]:
+    if st.button("Load English Sample"):
+        st.session_state.input_text = "Artificial intelligence is reshaping the future of automation and problem solving."
+        st.session_state.src_lang = "English"
+        st.session_state.tgt_lang = "Spanish"
+        st.rerun()
+with sample_cols[1]:
+    if st.button("Load French Sample"):
+        st.session_state.input_text = "Le modèle de détection d'objets fonctionne en temps réel avec une grande précision."
+        st.session_state.src_lang = "French"
+        st.session_state.tgt_lang = "English"
+        st.rerun()
+with sample_cols[2]:
+    if st.button("Load Hindi Sample"):
+        st.session_state.input_text = "कृत्रिम बुद्धिमत्ता आधुनिक सॉफ्टवेयर विकास को बदल रही है।"
+        st.session_state.src_lang = "Hindi"
+        st.session_state.tgt_lang = "English"
+        st.rerun()
+
 # Main Translation Workbench (Split Screen)
 work_col1, work_col2 = st.columns(2, gap="medium")
 
@@ -214,11 +251,13 @@ with work_col1:
     )
     input_text = st.text_area(
         "Source Text Input",
-        value="",
+        value=st.session_state.input_text,
         placeholder="Enter text or paste document content to translate...",
         height=240,
         label_visibility="collapsed",
+        key="source_text_box",
     )
+    st.session_state.input_text = input_text
 
     # Word and char count for source
     src_chars = len(input_text)
@@ -245,7 +284,7 @@ with work_col2:
         unsafe_allow_html=True,
     )
 
-    # Perform Translation when triggered or when input changes
+    # Perform Translation when triggered
     if translate_trigger and input_text.strip():
         with st.spinner("Synthesizing translation..."):
             result = service.translate(
@@ -258,13 +297,15 @@ with work_col2:
 
     result = st.session_state.last_result
 
-    if result and result.translated_text:
+    if result and result.error:
+        st.error(result.error)
+    elif result and result.translated_text:
         st.markdown(
             f'<div class="output-box">{result.translated_text}</div>',
             unsafe_allow_html=True,
         )
         st.markdown(
-            f'<div class="meta-tag" style="margin-top: 0.35rem;">{result.word_count} words · {result.char_count} characters · Latency: {result.latency_ms}ms</div>',
+            f'<div class="meta-tag" style="margin-top: 0.35rem;">{result.word_count} words · {result.char_count} characters · Latency: {result.latency_ms}ms · Engine: {result.provider_used}</div>',
             unsafe_allow_html=True,
         )
     else:

@@ -1,6 +1,5 @@
 """Constants, language registries, and clean SVG visual tokens."""
 
-# Comprehensive dictionary of supported languages
 SUPPORTED_LANGUAGES = {
     "Auto Detect": "auto",
     "English": "en",
@@ -44,6 +43,48 @@ SUPPORTED_LANGUAGES = {
     "Persian": "fa",
 }
 
+MYMEMORY_LANG_MAP = {
+    "English": "english",
+    "Spanish": "spanish",
+    "French": "french",
+    "German": "german",
+    "Italian": "italian",
+    "Portuguese": "portuguese",
+    "Russian": "russian",
+    "Hindi": "hindi",
+    "Telugu": "telugu",
+    "Tamil": "tamil india",
+    "Bengali": "bengali",
+    "Marathi": "marathi",
+    "Gujarati": "gujarati",
+    "Kannada": "kannada",
+    "Malayalam": "malayalam",
+    "Punjabi": "punjabi",
+    "Urdu": "urdu",
+    "Chinese (Simplified)": "chinese simplified",
+    "Chinese (Traditional)": "chinese traditional",
+    "Japanese": "japanese",
+    "Korean": "korean",
+    "Arabic": "arabic",
+    "Turkish": "turkish",
+    "Dutch": "dutch",
+    "Polish": "polish",
+    "Swedish": "swedish",
+    "Norwegian": "norwegian bokmål",
+    "Danish": "danish",
+    "Finnish": "finnish",
+    "Greek": "greek",
+    "Hebrew": "hebrew",
+    "Indonesian": "indonesian",
+    "Thai": "thai",
+    "Vietnamese": "vietnamese",
+    "Czech": "czech",
+    "Hungarian": "hungarian",
+    "Romanian": "romanian",
+    "Ukrainian": "ukrainian",
+    "Persian": "persian",
+}
+
 POPULAR_LANGUAGES = [
     "English",
     "Spanish",
@@ -57,7 +98,6 @@ POPULAR_LANGUAGES = [
     "Russian",
 ]
 
-# Clean SVG icons to avoid emojis and maintain anti-slop design system
 SVG_ICONS = {
     "swap": """<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 3 4 4-4 4"/><path d="M20 7H4"/><path d="m8 21-4-4 4-4"/><path d="M4 17h16"/></svg>""",
     "copy": """<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>""",
